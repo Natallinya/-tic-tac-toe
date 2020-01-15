@@ -1,0 +1,8 @@
+<button (click)="clear()">Начать заново</button>
+<h2 [style.color]="player === 'x' ? 'blue' : 'red'"> Ходит игрок {{ player }}</h2>
+<div class="board">
+    <div class="board__cell" #cell [ngClass]="getClassActive(i)" *ngFor="let item of boardSize; let i = index"
+        (click)="move(i,cell)">
+    </div>
+</div>
+<h2 [style.color]="player === 'x' ? 'blue' : 'red'">{{ showResult }}</h2>
