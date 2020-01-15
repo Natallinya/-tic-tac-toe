@@ -47,7 +47,7 @@ export class TikTakComponent {
             this.player === 'x' ? this.moveByX.push(i) : this.moveByY.push(i);
             this.moveCount++;
             if (!(this.moveCount === 9) && (this.moveByX.length >= this.sizeOfLine || this.moveByY.length >= this.sizeOfLine)) {
-                this.checkWinner();
+                this.player === 'x' ? this.checkWinner(this.moveByX) : this.checkWinner(this.moveByY);
                 if (this.winnerArray.length) {
                     this.showResult = `Победитель игрок ${this.player}`;
                 }
@@ -75,15 +75,9 @@ export class TikTakComponent {
         this.winnerArray = [];
     }
 
-    private checkWinner(): boolean {
-        if (this.moveByX.length >= this.sizeOfLine) {
-            this.winnerArray = this.winnerResults.find(item => !item.some(elem => this.moveByX.indexOf(elem) === -1)) || [];
-            if (this.winnerArray.length) {
-                return true;
-            }
-        }
-        if (this.moveByY.length >= this.sizeOfLine) {
-            this.winnerArray = this.winnerResults.find(item => !item.some(elem => this.moveByY.indexOf(elem) === -1)) || [];
+    private checkWinner(checkArray: number[]): boolean {
+        if (checkArray.length >= this.sizeOfLine) {
+            this.winnerArray = this.winnerResults.find(item => !item.some(elem => checkArray.indexOf(elem) === -1)) || [];
             if (this.winnerArray.length) {
                 return true;
             }
